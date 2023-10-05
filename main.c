@@ -7,8 +7,8 @@ void insertionSort(int array[], int tam);
 void selectionSort(int array[], int tam);
 
 void main(){
-    int arrayTeste[10] = {5, 6, 2, 3, 4, 7, 9, 10, 1, 8};
-    selectionSort(arrayTeste, 10);
+    int arrayTeste[10] = {8, 100, 0, 3, 7, 9, 2, 7, -3, 0};
+    insertionSort(arrayTeste, 10);
     printIntArray(arrayTeste,10);
 }
 void printIntArray(int arr[], int tam){
@@ -39,6 +39,7 @@ void bubbleSort(int array[], int tam){
 void insertionSort(int array[], int tam){
     int i,j, eleito;
     for(i = 1; i<tam; i++){
+        printIntArray(array, tam);
         eleito = array[i];
         j = i-1;
         while(j>=0 && eleito<array[j]){

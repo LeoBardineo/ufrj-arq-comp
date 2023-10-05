@@ -59,32 +59,32 @@ addi $s3,$s2,-1
     
     # add $s3, $s3,$s0
     # lw $t3, 0($s3)
+    while:
     sll $s5, $s3, 2     # s5 = s3 * 4
     add $s5, $s5, $s0   # s5 = s5 + array (endereço na posição s2)
     lw $t3, 0($s5)      # *t3 = *s5
     
-    slt $t1,$zero,$s3
+    slt $t1,$s3,$zero
     slt $t2,$s4,$t3
-    bne $t1,$zero,exit2  #verifica j>=0
-    bne $t2,$zero,exit2  #verifica eleito<array[j]
-    while:
-    # add $s3, $s3,$s0
-    # lw $t3, 0($s3)
-    # lw $t4, 4($s3)
+    bne $t1,$zero,exit2 # verifica j>=0
+    bne $t2,$zero,exit2 # verifica eleito < array[j]
     sll $s5, $s3, 2     # s5 = s3 * 4   pega o indice * 4
     add $s5, $s5, $s0   # s5 = s5[s3]   soma o indice * 4 ao endereço do array
     lw $s7, 0($s5)      # s7 = *s5
     addi $s6, $s5, 4    # s6 = s5++     coloca o endereço da proxima posição em s6
-    sw $s7, 0($s6)      # *s6 = s7 (era o que devia acontecer)
+    sw $s7, 0($s6)      # *s6 = s7      (era o que devia acontecer)
 
-    # move $t4,$t3
-    # s6 = *s5
-    # sw $s6, 0($s5)      # s6 = *s5
-    # la $s6, 0($s5)
-
-    addi $s3,$s3,-1
+    addi $s3,$s3,-1     # j -= 1;
+    j while
     exit2:
-    move $t4, $s4
+    # move $t4, $s4
+    # sw $s4, 0($s6)      # *s6 = s4      (era o que devia acontecer)
+    # *(memoria)
+    # move $s6, $s4
+    sll $s6, $s3, 2     # s6 = s3 * 4   pega o indice * 4
+    addi $s6, $s6, 4
+    add $s6, $s6, $s0   # s6 = s6[s3]   soma o indice * 4 ao endereço do array
+    sw $s4, 0($s6)
 addi $s2,$s2,1
 j for1
 exit1:
