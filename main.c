@@ -8,7 +8,7 @@ void selectionSort(int array[], int tam);
 
 void main(){
     int arrayTeste[10] = {8, 100, 0, 3, 7, 9, 2, 7, -3, 0};
-    insertionSort(arrayTeste, 10);
+    selectionSort(arrayTeste, 10);
     printIntArray(arrayTeste, 10);
 }
 
@@ -56,6 +56,7 @@ void insertionSort(int array[], int tam){
 void selectionSort(int array[], int tam){
     int i,j, idMenor;
     for(i=0; i<tam-1;i++){
+        printIntArray(array, tam);
         idMenor = i;
         for(j = i+1; j < tam; j++){
             if(array[j]<array[idMenor]){
