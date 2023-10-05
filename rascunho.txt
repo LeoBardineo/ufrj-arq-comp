@@ -1,0 +1,47 @@
+
+void bubbleSort(int array[], int tam){
+    int temp;
+    int trocado = 0;
+    for (int i = 0; i < tam - 1; i++){
+        for (int j = 0; j < tam - i - 1; j++){
+            if(array[j] > array[j + 1]){
+                swap(&array[j], &array[j + 1]);
+                trocado = 1;
+            }
+        }
+
+        if(!trocado){
+            break;
+        }
+    }
+}
+
+if(array[j] > array[j + 1]){
+	swap(&array[j], &array[j + 1]);
+}
+
+
+    lw $t2, 40($s2)			# t2
+
+	lw $t0, 32($s3)			# t0 = A[32/4]
+	add $s1, $s2, $t0		# s1 = s2 + t0
+
+	# a = b + c
+	# A[a] = h + A[8];
+
+	add $s3, $s4, $s5	# a = b + c
+	lw $t0, 32($s3)		# t0 = A[8]
+	add $t0, $s2, $t0	# t0 = h + A[8]
+	add $t1, $s0, $s0	# t1 = a + a
+	add $t1, $t1, $t1	# t1 = t1 + t1 	-> t1 = a * 4
+	add $t1, $t1, $s3	# t1 = t1 + A 	-> t1 = a * 4(A) 	-> t1 = A[a]
+	sw $t0, 0($t1)		# A[a] = t0
+
+swap:
+sll $t1, $a1, 2			# t1 = k * 4
+add $t1, $a0, $t1		# t1 = v[k]
+lw $t0, 0($t1)			# t0 = v[k]
+lw $t2, 4($t1)			# t2 = v[k + 1]
+sw $t2, 0($t1)			# v[k] = t2
+sw $t0, 4($t1)			# v[k + 1] = t0
+jr $ra					# preserva (?)
