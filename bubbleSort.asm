@@ -14,17 +14,17 @@ la		$s3, arrayteste
 la		$s4, 10
 
 bubblesort:
-move	$s0, $zero						# i = 0
+move	$s0, $zero						# i = 0				; s0 = 0 
 for1:
-move	$s1, $zero 						# j = 0
-addi	$t0, $s4, -1					# t0 = s4 - 1
-slt		$t1, $s0, $t0					# t1 = s0 < t0
-beq		$t1, $zero, endfor1				# if (s0 == tamanho) goto endfor1
+move	$s1, $zero 						# j = 0				; s1 = 0
+addi	$t0, $s4, -1					# 					; t0 = s4 - 1
+slt		$t1, $s0, $t0					# 					; t1 = s0 < t0
+beq		$t1, $zero, endfor1				# for(i < tamanho)	; if (s0 == tamanho) goto endfor1
 	for2:
-	addi	$t1, $s0, 1					# t1 = s0 + 1
-	sub		$t1, $s4, $t1				# t1 = s4 - t1
-	slt		$t2, $s1, $t1				# t2 = s1 < t1
-	beq		$t2, $zero, endfor2			# if (s1 == tamanho) goto endfor2
+	addi	$t1, $s0, 1					# 					; t1 = s0 + 1
+	sub		$t1, $s4, $t1				# 					; t1 = s4 - t1
+	slt		$t2, $s1, $t1				# 					; t2 = s1 < t1
+	beq		$t2, $zero, endfor2			# for(j < tamanho)	; if (s1 == tamanho) goto endfor2
 
 		li		$t0, 0					# $t0 = contador para printar os números no array
 		la		$t1, arrayteste			# $t1 = endereço de memória do array
