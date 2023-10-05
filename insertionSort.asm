@@ -15,25 +15,25 @@ la      $s0, arrayteste
 la      $s1, 10
 
 insertionSort:
-li      $s2, 1              # i = 0
+li      $s2, 1                  # i = 0
 for1:
-li      $t0, 0				# $t0 = contador para printar os números no array
-la      $t1, arrayteste		# $t1 = endereço de memória do array
+li      $t0, 0				    # $t0 = contador para printar os números no array
+la      $t1, arrayteste		    # $t1 = endereço de memória do array
 printarray:
     bge     $t0, $s1, endprintarray
 
     # Carrega em $t2 o valor em $t1 e avança o ponteiro de $t1
-    lw      $t2, 0($t1)		# t2 = *t1;
-    addi    $t1, $t1, 4		# t1 += 4;	avança o ponteiro para a próxima posição no array
+    lw      $t2, 0($t1)		    # t2 = *t1;
+    addi    $t1, $t1, 4		    # t1 += 4;	avança o ponteiro para a próxima posição no array
 
     # Printa o $t2
-    li      $v0, 1      	# carrega a syscall para printar int
-    move    $a0, $t2		# a syscall printa o que está $a0, logo carregamos $t2 em $a0
+    li      $v0, 1      	    # carrega a syscall para printar int
+    move    $a0, $t2		    # a syscall printa o que está $a0, logo carregamos $t2 em $a0
     syscall
 
     # Printa um espaço " "
-    li      $v0, 11			# carrega a syscall para printar um char
-    li      $a0, 32			# espaço = 32 na tabela ASCII
+    li      $v0, 11			    # carrega a syscall para printar um char
+    li      $a0, 32			    # espaço = 32 na tabela ASCII
     syscall
 
     # Incrementa o contador do loop de printar números
