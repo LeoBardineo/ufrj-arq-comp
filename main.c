@@ -9,17 +9,20 @@ void selectionSort(int array[], int tam);
 void main(){
     int arrayTeste[10] = {8, 100, 0, 3, 7, 9, 2, 7, -3, 0};
     insertionSort(arrayTeste, 10);
-    printIntArray(arrayTeste,10);
+    printIntArray(arrayTeste, 10);
 }
+
 void printIntArray(int arr[], int tam){
     for (int i = 0; i < tam-1; i++) printf("%d, ", arr[i]);
     printf("%d\n", arr[tam-1]);
 }
+
 void swap(int* a, int* b){
     int temp = *a;
     *a = *b;
     *b = temp;
 }
+
 void bubbleSort(int array[], int tam){
     int temp;
     int trocado = 0;
@@ -36,19 +39,20 @@ void bubbleSort(int array[], int tam){
         }
     }
 }
+
 void insertionSort(int array[], int tam){
     int i,j, eleito;
-    for(i = 1; i<tam; i++){
-        printIntArray(array, tam);
+    for(i = 1; i < tam; i++){
         eleito = array[i];
-        j = i-1;
-        while(j>=0 && eleito<array[j]){
-            array[j+1] = array[j];
-            j-=1;
+        j = i - 1;
+        while(j >= 0 && eleito < array[j]){
+            array[j + 1] = array[j];
+            j -= 1;
         }
-        array[j+1]=eleito;
+        array[j + 1] = eleito;
     }
 }
+
 void selectionSort(int array[], int tam){
     int i,j, idMenor;
     for(i=0; i<tam-1;i++){

@@ -13,7 +13,6 @@ nline: .asciiz "\n"
 la $s3, arrayteste
 la $s4, 10
 
-
 bubblesort:
 move $s0, $zero	# i = 0
 for1:
