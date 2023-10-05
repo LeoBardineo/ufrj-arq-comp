@@ -36,7 +36,7 @@ for1:
         if1end:
         addi $s3,$s3,1              #s3=s3+1
         j for2
-    exit2
+    exit2:
     addi $s2,$s2,1                  #s2=s2+1
     beq $s2,$s4, if2end             #verifica s2=s2
     if2:
