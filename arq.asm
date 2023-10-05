@@ -58,7 +58,7 @@ beq $t1, $zero, endfor1	# if s0 == tamanho acabaFor
 		lw $t6, 0($t3)
 		lw $t7, 4($t3)
 
-		slt $t0, $t6, $t7  			# t0 = arr[j] > arr[j+1]
+		slt $t0, $t7, $t6  			# t0 = arr[j] > arr[j+1]
 		beq $t0, $zero, elseif		# if(!t0)
 		# swap
 		sw $t7, 0($t3)
