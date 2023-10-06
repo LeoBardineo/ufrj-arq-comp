@@ -1,70 +1,74 @@
-#include <stdlib.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 void printIntArray(int arr[], int tam);
 void bubbleSort(int array[], int n);
 void insertionSort(int array[], int tam);
 void selectionSort(int array[], int tam);
 
-void main(){
-    int arrayTeste[10] = {8, 100, 0, 3, 7, 9, 2, 7, -3, 0};
-    selectionSort(arrayTeste, 10);
-    printIntArray(arrayTeste, 10);
+void main() {
+  int arrayTeste[10] = {8, 100, 0, 3, 7, 9, 2, 7, -3, 0};
+  selectionSort(arrayTeste, 10);
+  printIntArray(arrayTeste, 10);
 }
 
-void printIntArray(int arr[], int tam){
-    for (int i = 0; i < tam-1; i++) printf("%d, ", arr[i]);
-    printf("%d\n", arr[tam-1]);
+void printIntArray(int arr[], int tam) {
+  for (int i = 0; i < tam - 1; i++) printf("%d, ", arr[i]);
+  printf("%d\n", arr[tam - 1]);
 }
 
-void swap(int* a, int* b){
-    int temp = *a;
-    *a = *b;
-    *b = temp;
+void swap(int* a, int* b) {
+  int temp = *a;
+  *a = *b;
+  *b = temp;
 }
 
-void bubbleSort(int array[], int tam){
-    int temp;
-    int trocado = 0;
-    for (int i = 0; i < tam - 1; i++){
-        for (int j = 0; j < tam - i - 1; j++){
-            if(array[j] > array[j + 1]){
-                swap(&array[j], &array[j + 1]);
-                trocado = 1;
-            }
-        }
-
-        if(!trocado){
-            break;
-        }
+void bubbleSort(int array[], int tam) {
+  int temp;
+  int trocado = 0;
+  for (int i = 0; i < tam - 1; i++) {
+    for (int j = 0; j < tam - i - 1; j++) {
+      if (array[j] > array[j + 1]) {
+        swap(&array[j], &array[j + 1]);
+      }
     }
+    // if(!trocado){
+    //     break;
+    // }
+  }
+  for (int k = 0; k < tam - 1; k++) printf("%d, ", array[k]);
+  printf("%d\n", array[tam - 1]);
 }
 
-void insertionSort(int array[], int tam){
-    int i,j, eleito;
-    for(i = 1; i < tam; i++){
-        eleito = array[i];
-        j = i - 1;
-        while(j >= 0 && eleito < array[j]){
-            array[j + 1] = array[j];
-            j -= 1;
-        }
-        array[j + 1] = eleito;
+void insertionSort(int array[], int tam) {
+  int i, j, eleito;
+  for (i = 1; i < tam; i++) {
+    eleito = array[i];
+    j = i - 1;
+    while (j >= 0 && eleito < array[j]) {
+      array[j + 1] = array[j];
+      j -= 1;
     }
+    array[j + 1] = eleito;
+  }
+  for (int k = 0; k < tam - 1; k++) printf("%d, ", array[k]);
+  printf("%d\n", array[tam - 1]);
 }
 
-void selectionSort(int array[], int tam){
-    int i,j, idMenor;
-    for(i=0; i<tam-1;i++){
-        printIntArray(array, tam);
-        idMenor = i;
-        for(j = i+1; j < tam; j++){
-            if(array[j]<array[idMenor]){
-                idMenor=j;
-            }
-        }
-        if(i != idMenor){
-            swap(&array[i],&array[idMenor]);
-        }
+void selectionSort(int array[], int tam) {
+  int i, j, idMenor;
+  for (i = 0; i < tam - 1; i++) {
+    printIntArray(array, tam);
+    idMenor = i;
+    for (j = i + 1; j < tam; j++) {
+      if (array[j] < array[idMenor]) {
+        idMenor = j;
+      }
     }
+    if (i != idMenor) {
+      swap(&array[i], &array[idMenor]);
+    }
+  }
+  for (int k = 0; k < tam - 1; k++) printf("%d, ", array[k]);
+  printf("%d\n", array[tam - 1]);
 }
