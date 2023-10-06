@@ -48,6 +48,7 @@ for1:
     slt $t0,$s2,$s3                 # t0 = (i < tam-1)
     beq $t0,$zero,exit1             # se t0 = 0, sai do for, se não continua
     add $s4,$s2,$zero               # idMenor = i
+    sll $s4, $s4, 2                 # idMenor *= 4
     addi $s3,$s2,1                  # j = i + 1
 
     for2:
@@ -58,34 +59,35 @@ for1:
             sll $t8, $s3, 2         # t8 = j * 4
             add $t8, $t8, $s0       # t8 = array + j
             lw $t3, 0($t8)          # t3 = *(array + j)
-            sll $t9, $s4, 2         # t9 = idMenor * 4
+            # sll $t9, $s4, 2       # t9 = idMenor * 4
+            move $t9, $s4           # t9 = idMenor
             add $t9, $t9, $s0       # t9 = array + idMenor
             lw $t4, 0($t9)          # t4 = *(array + idMenor)
             slt $t1,$t3,$t4         # t1 = (t3 < t4)
             beq $t1,$zero,if1end    # if (t1 == 0) goto if1end
-            move $s4, $s3           # s4 = s3
-            sll $s4, $s4, 2         # s4 *= 4
+            move $s4, $s3           # idMenor = j
+            sll $s4, $s4, 2         # idMenor *= 4
         if1end:
-        addi $s3,$s3,1              #s3=s3+1
+        addi $s3,$s3,1              # s3 = s3 + 1
         j for2
     exit2:
 
     beq $s2,$s4, if2end             #verifica s2=s4 ; if(i == idMenor) goto if2end
     if2:    
-        sll $s5, $s2, 2     # s5 = s2 * 4   pega o indice * 4
-        add $s5, $s5, $s0   # s5 = s5[s2]   soma o indice * 4 ao endereço do array
+        sll $s5, $s2, 2     # s5 = i * 4   pega o indice * 4
+        add $s5, $s5, $s0   # s5 = s0 + i * 4   soma o indice * 4 ao endereço do array
 
-        move $s7, $s4
-        add $s7, $s7, $s0   # s7 = s7[s4]   soma o indice * 4 ao endereço do array
+        move $s7, $s4       # s7 = idMenor
+        add $s7, $s7, $s0   # s7 = s0 + idMenor   soma o indice * 4 ao endereço do array
         
         # Faz o swap
-        sll     $t3, $s2, 2             # t3 = s2 * 4
-        add     $t3, $t3, $s0           # t3 = s0[s2]
-        lw      $t7, 0($s5)             # t7 = *s5
+        # sll     $t3, $s2, 2             # t3 = s2 * 4
+        # add     $t3, $t3, $s0           # t3 = s0[s2]
+        lw      $t7, 0($s5)             # t7 = *s5 | t7 = array[i]
 
-        move    $t3, $s4                # t3 = s4
-        add     $t3, $t3, $s0           # t3 = s0[s4]
-        lw      $t1, 0($s7)             # t1 = *s7
+        # move    $t3, $s4                # t3 = s4
+        # add     $t3, $t3, $s0           # t3 = s0[s4]
+        lw      $t1, 0($s7)             # t1 = *s7 | t1 = array[idMenor]
 
 		sw		$t7, 0($s7)				# arrayteste[s4] = t5
 		sw		$t1, 0($s5)				# arrayteste[s2] = t1    
