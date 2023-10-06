@@ -16,7 +16,8 @@ la $s1, 10
 selectionSort:
 move $s2,$zero                      # i = 0                      
 for1:
-    slt $t0,$s2,$s1                 # verifica se i<tam ou s2<s1
+    addi $s3, $s1, -1               # s3 = tam - 1
+    slt $t0,$s2,$s3                 # t0 = (i < tam-1)
     beq $t0,$zero,exit1             # se t0 = 0, sai do for, se não continua
     add $s4,$s2,$zero               # idMenor = i
     addi $s3,$s2,1                  # j = i + 1
@@ -82,18 +83,21 @@ for1:
         #lw $t4, 0($s4)      
         sll $s5, $s2, 2     # s5 = s2 * 4   pega o indice * 4
         add $s5, $s5, $s0   # s5 = s5[s2]   soma o indice * 4 ao endereço do array
-        sll $s7, $s4, 2     # s7 = s4 * 4   pega o indice * 4
+        # sll $s7, $s4, 2     # s7 = s4 * 4   pega o indice * 4
+        move $s7, $s4
         add $s7, $s7, $s0   # s7 = s7[s4]   soma o indice * 4 ao endereço do array
         
         # Faz o swap
-        sll     $t3, $s2, 2
-        add     $t3, $t3, $s0
-        lw      $t7, 0($s5)
-		sw		$t7, 0($t3)				# arrayteste[s2] = t5
-        sll     $t3, $s4, 2
-        add     $t3, $t3, $s0
-        lw      $t7, 0($s7)
-		sw		$t7, 0($t3)				# arrayteste[s4] = t7
+        sll     $t3, $s2, 2             # t3 = s2 * 4
+        add     $t3, $t3, $s0           # t3 = s0[s2]
+        lw      $t7, 0($s5)             # t7 = *s5
+
+        move    $t3, $s4                # t3 = s4
+        add     $t3, $t3, $s0           # t3 = s0[s4]
+        lw      $t1, 0($s7)             # t1 = *s7
+
+		sw		$t7, 0($s7)				# arrayteste[s4] = t5
+		sw		$t1, 0($s5)				# arrayteste[s2] = t1
 
         # add $t4, $zero, $s5          #t4<-s5
         # add $s5, $zero, $s7          #s5<-s7
